@@ -1,0 +1,19 @@
+{
+  "name": "pwa2017-whats-going-on",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://wasudev@github.com/nitipatl/pwa2017-whats-going-on.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nitipatl/pwa2017-whats-going-on/issues"
+  },
+  "homepage": "https://github.com/nitipatl/pwa2017-whats-going-on#readme"
+}
