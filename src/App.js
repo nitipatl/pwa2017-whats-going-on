@@ -5,15 +5,63 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <nav className="nav">
+        <div className="nav-left">
+          <a className="nav-item">
+            <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma logo" />
+          </a>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+
+        <div className="nav-center">
+          <a className="nav-item">
+            <span className="icon">
+              <i className="fa fa-github"></i>
+            </span>
+          </a>
+          <a className="nav-item">
+            <span className="icon">
+              <i className="fa fa-twitter"></i>
+            </span>
+          </a>
+        </div>
+        <span className="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <div className="nav-right nav-menu">
+          <a className="nav-item">
+            Home
+          </a>
+          <a className="nav-item">
+            Documentation
+          </a>
+          <a className="nav-item">
+            Blog
+          </a>
+
+          <div className="nav-item">
+            <div className="field is-grouped">
+              <p className="control">
+                <a className="button" >
+                  <span className="icon">
+                    <i className="fa fa-twitter"></i>
+                  </span>
+                  <span>Tweet</span>
+                </a>
+              </p>
+              <p className="control">
+                <a className="button is-primary">
+                  <span className="icon">
+                    <i className="fa fa-download"></i>
+                  </span>
+                  <span>Download</span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </nav>
     );
   }
 }
