@@ -1,46 +1,44 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import Map, {GoogleApiWrapper} from './Map'
 
-const Container = React.createClass({
-  getInitialState: function() {
+class PinMap extends Component {
+  
+  
+
+  getInitialState () {
     return {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
     }
-  },
-
-  onMapMoved: function(props, map) {
+  }
+  onMapMoved (props, map) {
     const center = map.center;
-  },
-
-  onMarkerClick: function(props, marker, e) {
+  }
+  onMarkerClick (props, marker, e) {
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
     });
-  },
-
-  onInfoWindowClose: function() {
+  }
+  onInfoWindowClose () {
     this.setState({
       showingInfoWindow: false,
       activeMarker: null
     })
-  },
-
-  onMapClicked: function(props) {
+  }
+  onMapClicked (props) {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
         activeMarker: null
       })
     }
-  },
-
-  render: function() {
+  }
+  render () {
     if (!this.props.loaded) {
       return <div>Loading...</div>
     }
@@ -56,8 +54,8 @@ const Container = React.createClass({
           onDragend={this.onMapMoved} />
     )
   }
-});
+}
 
 export default GoogleApiWrapper({
   apiKey: "AIzaSyAMKm8sG8J_fYSLGf3oxUNfNLNM2SvRr2c"
-})(Container)
+})(PinMap)
