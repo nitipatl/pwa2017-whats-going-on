@@ -1,0 +1,16 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import PinMap from './PinMap';
+import App from './App'
+import registerServiceWorker from './registerServiceWorker';
+import './styles/bulma.css';
+import './styles/font-awesome.css';
+
+<<<<<<< HEAD
+ReactDOM.render(
+  <App />
+, document.getElementById('root'));
+=======
+ReactDOM.render(<PinMap />, document.getElementById('root'));
+>>>>>>> 172367fb10ec85dd11716db6cfbfef972730e2a6
+registerServiceWorker();
