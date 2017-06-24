@@ -4,6 +4,7 @@ import axios from 'axios'
 import Map, {GoogleApiWrapper} from './Map'
 import Marker from '../../src/components/Marker'
 import InfoWindow from '../../src/components/InfoWindow'
+import { Link } from 'react-router-dom'
 
 class PinMap extends Component {
   constructor () {    
@@ -80,6 +81,8 @@ class PinMap extends Component {
               onClick={this.onMarkerClick}
               title={pin.title}
               descriptions={pin.descriptions}
+              imageGame={pin.imageGame}
+              id={pin.id}
               position={{lat: pin.cood_y, lng: pin.cood_x}} />)
             })
           }
@@ -90,17 +93,14 @@ class PinMap extends Component {
           onClose={this.onInfoWindowClose}>
             <div>
               <ul>
-                <li className="title is-5">
-                  {this.state.selectedPlace.title}
-                </li>
-                <li>
-                  <hr/>
+                <li className="title is-5 line-heigh-info-window">
+                  <img className="image is-96x96" src={this.state.selectedPlace.imageGame}/> {this.state.selectedPlace.title}
                 </li>
                 <li>
                   {this.state.selectedPlace.descriptions}
                 </li>
+                <li><hr/></li>
                 <li>
-                  <hr/>
                   <a className="button is-primary title is-5">Let's Rock</a>
                 </li>
               </ul>
