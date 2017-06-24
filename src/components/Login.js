@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Login.css';
+import '../styles/Login.css';
 import FacebookLogin from 'react-facebook-login';
-import bg from './assets/images/bg.jpeg';
+import bg from '../assets/images/bg.jpeg';
 
 class Login extends Component {
 
@@ -19,6 +19,9 @@ class Login extends Component {
                 appId="1846600289000828"
                 autoLoad={true}
                 fields="name,email,picture"
+                icon="fa-facebook"
+                textButton="Login Via Facebook"
+                size="metro"
                 callback={this.responseFacebook} />
             </div>
           </div>

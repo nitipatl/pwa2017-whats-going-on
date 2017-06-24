@@ -6,8 +6,11 @@ import registerServiceWorker from './registerServiceWorker';
 import './styles/bulma.css';
 import './styles/font-awesome.css';
 
-
+<<<<<<< HEAD
 ReactDOM.render(
   <App />
 , document.getElementById('root'));
+=======
+ReactDOM.render(<PinMap />, document.getElementById('root'));
+>>>>>>> 172367fb10ec85dd11716db6cfbfef972730e2a6
 registerServiceWorker();
