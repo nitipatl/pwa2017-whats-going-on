@@ -1,8 +1,9 @@
 import React from 'react'
+import PinMap from './PinMap.js'
 
 const Home = () => (
   <div>
-    Home
+    <PinMap></PinMap>
   </div>
 )
 
