@@ -4,12 +4,19 @@ import Navbar from './Common/Navbar'
 import '../styles/Login.css';
 import FacebookLogin from 'react-facebook-login';
 import bg from '../assets/images/bg.jpeg';
-import { saveState } from '../lib/localStorage'
+import { saveState, loadState } from '../lib/localStorage'
 
 class Login extends Component {
-
+  componentWillMount() {
+    const auth = loadState('auth')
+    if(auth !== undefined) {
+      this.props.history.push("/");
+    }
+  }
   responseFacebook = (response) => {
+    console.log(response)
     const auth = {
+      userID: response.userID,
       name: response.name,
       email: response.email,
       expiresIn: response.expiresIn,

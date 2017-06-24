@@ -7,6 +7,7 @@ import Logo from '../../logo.png'
 class Navbar extends Component {
   state = {
     auth: {
+      userID: '',
       name: '',
       email: '',
       avatar: '',
@@ -22,14 +23,11 @@ class Navbar extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('new')
-  } 
-
   logout = () => {
     deleteState('auth')
     this.setState({
       auth: {
+        userID: '',
         name: '',
         email: '',
         avatar: '',
@@ -50,12 +48,12 @@ class Navbar extends Component {
           this.state.auth.name !== ''
           &&
           <div className="nav-center">
-            <a className="nav-item">
+            <div className="nav-item">
               <img className="avatar" src={this.state.auth.avatar} alt="Image" />
-            </a>
-            <a className="nav-item">
+            </div>
+            <div className="nav-item">
               {this.state.auth.name}
-            </a>
+            </div>
           </div>
         }
         <span className="nav-toggle">
