@@ -12,6 +12,7 @@ class PinMap extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
+      pins: [],
     }
   } 
 
@@ -78,35 +79,34 @@ class PinMap extends Component {
               return (<Marker
               onClick={this.onMarkerClick}
               title={pin.title}
-              name={pin.title}
+              descriptions={pin.descriptions}
               position={{lat: pin.cood_y, lng: pin.cood_x}} />)
             })
           }
-
+          
           <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
           onClose={this.onInfoWindowClose}>
             <div>
-              <h1>{this.state.selectedPlace.name}</h1>
+              <ul>
+                <li className="title is-5">
+                  {this.state.selectedPlace.title}
+                </li>
+                <li>
+                  <hr/>
+                </li>
+                <li>
+                  {this.state.selectedPlace.descriptions}
+                </li>
+                <li>
+                  <hr/>
+                  <a className="button is-primary title is-5">Let's Rock</a>
+                </li>
+              </ul>
+              
             </div>
         </InfoWindow>
-          
-          
-          {/*<Marker
-              onClick={this.onMarkerClick}
-              title={'pin.title'}
-              name={'pin.title'}
-              position={{lat: 13.715086099999999, lng: 100.46713179999999}} />
-          
-          <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-          onClose={this.onInfoWindowClose}>
-            <div>
-              <h1>{this.state.selectedPlace.name}</h1>
-            </div>
-        </InfoWindow>*/}
       </Map>
     )
   }
