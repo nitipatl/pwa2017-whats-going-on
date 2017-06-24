@@ -20,7 +20,7 @@ class Home extends Component {
     return (
       <div>
         <Navbar />
-        <div className="columns is-multiline is-mobile pin-card">
+        <div className="columns is-multiline pin-card">
           {
             this.state.pins.map((pin, index) => <PinCard key={`PinCard-${index}`} {...pin} id={index} />)
           }
