@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Navbar from '../Common/Navbar'
+import JoinButton from './Join'
 
 class Detail extends Component { 
   constructor(props) {
@@ -58,6 +59,7 @@ class Detail extends Component {
                   <span className="icon is-small"><i className="fa fa-users"></i></span>
                 </a>
                 &nbsp;{ this.state.data.members && this.state.data.members.join(', ') }
+                <JoinButton detailReload={this._fetchData.bind(this)} id={ this.props.match.params.id } />
               </div>
             </nav>
           </div>
