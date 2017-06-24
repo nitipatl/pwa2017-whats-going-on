@@ -14,7 +14,7 @@ const PinCard = (props) => {
   } = props
   return (
     <div className="column is-one-quarter">
-      <Link to={`https://pwa2017-whats-going-on.firebaseio.com/Pin/${id}.json`}>
+      <Link to={`/events/${id}`}>
         <div className="card">
           <div className="card-image">
             <figure className="image is-4by3">
@@ -23,7 +23,6 @@ const PinCard = (props) => {
           </div>
           <div className="card-content">
             <p className="title is-4">{title}</p>
-            <br />
             <div className="media">
               <div className="media-left">
                 <figure className="image is-48x48">
@@ -35,7 +34,6 @@ const PinCard = (props) => {
               </div>
             </div>
             <div className="content">
-              <br />
               <div><i className="fa fa-users middle"></i>{members.length}/{numberUsers} คน</div>
               <div><i className="fa fa-clock-o middle"></i>{createAt}</div>
             </div>
