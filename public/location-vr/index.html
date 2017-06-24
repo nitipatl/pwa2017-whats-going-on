@@ -1,13 +1,17 @@
-<script src="//storage.googleapis.com/vrview/2.0/build/vrview.min.js"></script>
-
+<style>
+    #vrview > iframe {
+        width: 100%;
+        height: 100%;
+    }
+</style>
 <div id="vrview"></div>
-
 <script>
 window.addEventListener('load', onVrViewLoad)
 function onVrViewLoad() {
   var vrView = new VRView.Player('#vrview', {
     image: 'IMG_20170624_133639.vr-converted.jpg',
-    is_stereo: true
+    is_stereo: true,
   });
 }
 </script>
+<script src="//storage.googleapis.com/vrview/2.0/build/vrview.min.js"></script>
