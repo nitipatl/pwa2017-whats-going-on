@@ -8,9 +8,11 @@
   "dependencies": {
     "axios": "^0.16.2",
     "google-maps-react": "^1.0.19",
+    "history": "^4.6.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-facebook-login": "^3.6.2",
+    "react-router": "4.0.0-alpha.4",
     "react-router-dom": "^4.1.1"
   },
   "scripts": {
