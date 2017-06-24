@@ -53,12 +53,13 @@ class Detail extends Component {
                 <a className="level-item">
                   <span className="icon is-small"><i className="fa fa-users"></i></span>
                 </a>
-                &nbsp;{ this.state.data.numberUsers }
+                &nbsp;{ this.state.data.members && (this.state.data.members.length + this.state.data.numberUsers) } / { this.state.data.numberUsers }
                 &nbsp;&nbsp;
                 <a className="level-item">
                   <span className="icon is-small"><i className="fa fa-users"></i></span>
                 </a>
                 &nbsp;{ this.state.data.members && this.state.data.members.join(', ') }
+                &nbsp;&nbsp;
                 <JoinButton detailReload={this._fetchData.bind(this)} id={ this.props.match.params.id } />
               </div>
             </nav>

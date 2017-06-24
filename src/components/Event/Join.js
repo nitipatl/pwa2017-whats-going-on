@@ -51,7 +51,7 @@ class Join extends Component {
   render() {
     return (
       <a className="button is-primary" disabled={ this.state.disabled } onClick={this._joinNow.bind(this)}>
-        Join
+        { this.state.data.numberUsers == 0 ? 'Full' : 'Join!' }
       </a>
     )
   }
