@@ -36,7 +36,7 @@ const PinCard = (props) => {
             </div>
             <div className="content">
               <br />
-              <div><i className="fa fa-users middle"></i>{members.length}/{numberUsers}คน</div>
+              <div><i className="fa fa-users middle"></i>{members.length}/{numberUsers} คน</div>
               <div><i className="fa fa-clock-o middle"></i>{createAt}</div>
             </div>
           </div>
