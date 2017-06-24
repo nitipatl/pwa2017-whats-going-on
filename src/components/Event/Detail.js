@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const Detail = () => (
-  <div>
-    Event Detail
-  </div>
-)
+import Navbar from '../Common/Navbar'
+
+class Detail extends Component {
+  componentDidMount() {
+    console.log(this.props.match)
+  }
+  render() {
+    return (
+      <div>
+        <Navbar />
+        Event Detail
+      </div>
+    )
+  }
+}
 
 export default Detail
