@@ -1,0 +1,14 @@
+.avatar {
+  border-radius: 50px;
+}
+
+.pin-card {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 45px;
+}
+
+.middle {    
+  vertical-align: inherit !important;
+  margin-right: 7.5px;
+}
