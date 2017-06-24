@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import axios from 'axios'
+import Navbar from '../Common/Navbar'
 
 class Detail extends Component { 
   constructor(props) {
@@ -26,6 +26,7 @@ class Detail extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <article className="media">
           <figure className="media-left">
             <p className="image is-96x96">
