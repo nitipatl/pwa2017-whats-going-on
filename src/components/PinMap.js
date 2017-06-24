@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-
+import axios from 'axios'
 import Map, {GoogleApiWrapper} from './Map'
 import Marker from '../../src/components/Marker'
 import InfoWindow from '../../src/components/InfoWindow'
@@ -15,8 +15,20 @@ class PinMap extends Component {
     }
   } 
 
+  _fetchData = () => {
+    axios.get('https://pwa2017-whats-going-on.firebaseio.com/Pin.json')
+      .then((response) => {
+        this.setState({ 
+          pins: response.data
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   componentDidMount = () => {
-    console.log("didmount");
+    this._fetchData()
   }
   
   onMapMoved = (props, map) => {
@@ -47,7 +59,9 @@ class PinMap extends Component {
   render () {
     if (!this.props.loaded) {
       return <div>Loading...</div>
-    }
+    } 
+
+    console.log(this.state.pins)
     
     return (
       <Map google={this.props.google}
@@ -58,11 +72,17 @@ class PinMap extends Component {
           centerAroundCurrentLocation={true}
           onClick={this.onMapClicked}
           onDragend={this.onMapMoved} >
-          <Marker
-          onClick={this.onMarkerClick}
-          title={'00001'}
-          name={'00001'}
-          position={{lat: 13.72, lng: 100.46713179999999}} />
+
+          {
+            this.state.pins && this.state.pins.map((pin) => {
+              return (<Marker
+              onClick={this.onMarkerClick}
+              title={pin.title}
+              name={pin.title}
+              position={{lat: pin.cood_y, lng: pin.cood_x}} />)
+            })
+          }
+
           <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
@@ -71,6 +91,22 @@ class PinMap extends Component {
               <h1>{this.state.selectedPlace.name}</h1>
             </div>
         </InfoWindow>
+          
+          
+          {/*<Marker
+              onClick={this.onMarkerClick}
+              title={'pin.title'}
+              name={'pin.title'}
+              position={{lat: 13.715086099999999, lng: 100.46713179999999}} />
+          
+          <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+          onClose={this.onInfoWindowClose}>
+            <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+            </div>
+        </InfoWindow>*/}
       </Map>
     )
   }
