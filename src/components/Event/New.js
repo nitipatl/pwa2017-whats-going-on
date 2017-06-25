@@ -6,7 +6,9 @@ import axios from 'axios';
 import Navbar from '../Common/Navbar';
 import Map,{GoogleApiWrapper} from '../Map';
 import Marker from '../Marker';
+import DatePicker from 'react-datepicker';
 import { loadState, deleteState } from '../../lib/localStorage';
+import 'react-datepicker/dist/react-datepicker.css';
 
 class New extends Component {
   constructor(props) {
@@ -29,17 +31,23 @@ class New extends Component {
       game: '',
       numberOfMember: '',
       description: '',
+      lat: '',
+      long: '',
       auth: {},
       data: [],
+      startDate: moment(),
       selectGameKey: '',
-      formErrors: {title: '', numberOfMember: '', game: ''},
+      formErrors: {title: '', numberOfMember: '', game: '', lat: '', long: ''},
       titleValidate: false,
       numberOfMemberValidate: false,
       gameValidate: false,
-      formValid: false
+      formValid: false,
+      latValidate: false,
+      longValidate: false,
     }
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleChangeDate = this.handleChangeDate.bind(this);
   }
 
   componentDidMount() {
@@ -72,12 +80,20 @@ class New extends Component {
     }, () => { this.validateField(name, value) });
   }
 
+   handleChangeDate(date) {
+    this.setState({
+      startDate: date
+    });
+  }
+
   validateField(fieldName, value) {
     console.log(`validateField ${fieldName} :: ${value} `)
     let fieldValidationErrors = this.state.formErrors;
     let titleValidate = this.state.titleValidate;
     let numberOfMemberValidate = this.state.numberOfMemberValidate;
     let gameValidate = this.state.gameValidate;
+    let latValidate = this.state.latValidate;
+    let longValidate = this.state.longValidate;
 
     switch(fieldName) {
       case 'title':
@@ -89,9 +105,16 @@ class New extends Component {
         fieldValidationErrors.numberOfMember = numberOfMemberValidate ? '' : ' is empty';
         break
       case 'game':
-        console.log('game ', value);
         gameValidate = value !== ''
         fieldValidationErrors.game = gameValidate ? '' : 'please select';
+        break
+      case 'lat':
+        latValidate = value !== ''
+        fieldValidationErrors.lat = latValidate ? '' : 'is empty';
+        break
+      case 'long':
+        longValidate = value !== ''
+        fieldValidationErrors.long = longValidate ? '' : 'is empty';
         break
       default:
         break;
@@ -101,6 +124,8 @@ class New extends Component {
       titleValidate,
       numberOfMemberValidate,
       gameValidate,
+      latValidate,
+      longValidate
     }, this.validateForm);
   }
 
@@ -108,7 +133,9 @@ class New extends Component {
     this.setState({
       formValid: this.state.titleValidate &&
       this.state.numberOfMemberValidate &&
-      this.state.gameValidate
+      this.state.gameValidate &&
+      this.state.latValidate &&
+      this.state.longValidate
     }, () => console.log(this.state.numberOfMemberValidate));
   }
 
@@ -127,6 +154,7 @@ class New extends Component {
       members: [{name: 'Khing', token: 'cxasdadsadsdad', image: 'http://static.goal.com/4323400/4323432_news.jpg'}],
       name: this.state.auth.name,
       numberOfUsers: this.state.numberOfMember,
+      dateStart: this.state.startDate,
     }
     database.ref('/Pin').push(objectToSave);
   }
@@ -152,7 +180,7 @@ class New extends Component {
             <div className="column is-three-quarters">
               <div className="field">
                 <label className="label">
-                  <span style={{color: '#ff0000'}}>*</span> Title
+                  <span style={{color: '#ff0000'}}>*</span> TITLE
                 </label>
                 <p className="control">
                   <input
@@ -173,7 +201,7 @@ class New extends Component {
             <div className="column is-one-quarters">
               <div className="field">
                 <label className="label">
-                  <span style={{color: '#ff0000'}}>*</span> Number Of Member
+                  <span style={{color: '#ff0000'}}>*</span> NUMBER OF MEMBER
                 </label>
                 <p className="control">
                   <input
@@ -191,7 +219,7 @@ class New extends Component {
             <div className="column is-one-quarters">
               <div className="field">
                 <label className="label">
-                  <span style={{color: '#ff0000'}}>*</span> Game
+                  <span style={{color: '#ff0000'}}>*</span> GAME
                 </label>
                 <p className="control">
                   <span className={`select ${this.errorClass(this.state.formErrors.game)}`}>
@@ -212,7 +240,7 @@ class New extends Component {
           <div className="columns">
             <div className="column is-three-quarters">
               <div className="field">
-                <label className="label">Description</label>
+                <label className="label">DESCRIPTION</label>
                 <p className="control">
                   <textarea
                     className="textarea"
@@ -222,6 +250,60 @@ class New extends Component {
                     value={this.state.description}
                   >
                   </textarea>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="columns">
+            <div className="column is-three-quarters">
+              <label className="label">
+                <span style={{color: '#ff0000'}}>*</span> DATE START
+              </label>
+              <DatePicker
+                className="input is-one-quarters"
+                selected={this.state.startDate}
+                onChange={this.handleChangeDate}
+              />
+            </div>
+          </div>
+
+          
+          <div className="columns field is-horizonta">
+            <div className="column is-one-quarters">
+              <div className="field">
+                <label className="label">
+                  <span style={{color: '#ff0000'}}>*</span> LATITUDE
+                </label>
+                <p className="control">
+                  <input
+                    required
+                    className={`input ${this.errorClass(this.state.formErrors.lat)}`}
+                    type="text"
+                    placeholder="13.xxxxxx"
+                    value={this.state.lat}
+                    name="lat"
+                    onChange={this.handleChange} 
+                  />
+                </p>
+              </div>
+            </div>
+
+            <div className="column is-one-quarters">
+              <div className="field">
+                <label className="label">
+                  <span style={{color: '#ff0000'}}>*</span> LONGITUDE
+                </label>
+                <p className="control">
+                  <input
+                    required
+                    className={`input ${this.errorClass(this.state.formErrors.long)}`}
+                    type="text"
+                    placeholder="100.xxxxxx"
+                    value={this.state.long}
+                    name="long"
+                    onChange={this.handleChange} 
+                  />
                 </p>
               </div>
             </div>

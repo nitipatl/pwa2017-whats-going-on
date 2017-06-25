@@ -12,6 +12,7 @@
     "history": "^4.6.3",
     "moment": "^2.18.1",
     "react": "^15.6.1",
+    "react-datepicker": "^0.48.0",
     "react-dom": "^15.6.1",
     "react-facebook-login": "^3.6.2",
     "react-router": "4.0.0-alpha.4",
