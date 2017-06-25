@@ -173,9 +173,21 @@ class New extends Component {
 
   render() {
     return (
-      <div class="content">
+      <div className="content">
         <Navbar />
-        <div className="containers">
+        <section className="hero is-primary">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title">
+                New event
+              </h1>
+              <h2 className="subtitle">
+                Tell world which game I would like to play with other.
+              </h2>
+            </div>
+          </div>
+        </section>
+        <div className="containers" style={{padding: '20px'}}>
           <div className="columns">
             <div className="column is-three-quarters">
               <div className="field">
@@ -244,7 +256,7 @@ class New extends Component {
                 <p className="control">
                   <textarea
                     className="textarea"
-                    placeholder="Textarea"
+                    placeholder="Say something about detail"
                     name="description"
                     onChange={this.handleChange}
                     value={this.state.description}
@@ -321,7 +333,9 @@ class New extends Component {
               onDragend={this.onMapMoved} />
           </div>
         </div>
-        <button className="button is-primary" onClick={this.onClickSubmit} disabled={!this.state.formValid}>Save</button>
+        <center>
+          <button className="button is-primary" onClick={this.onClickSubmit} disabled={!this.state.formValid}>Save</button>
+        </center>
       </div>
     );
   };
