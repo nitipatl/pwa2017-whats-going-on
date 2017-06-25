@@ -15,8 +15,8 @@ class PinMap extends Component {
       selectedPlace: {},
       pins: [],
     }
-  } 
-
+  }
+  
   _fetchData = () => {
     // axios.get('https://pwa2017-whats-going-on.firebaseio.com/Pin.json')
     //   .then((response) => {
@@ -31,6 +31,10 @@ class PinMap extends Component {
     //   .catch((error) => {
     //     console.log(error)
     //   })
+    Object.keys(this.props.pins).map((key, index) => {
+      console.log("pins " + this.props.pins[key]);
+    });
+      
       this.setState({ 
           pins: [{
             id: 0,
@@ -84,7 +88,8 @@ class PinMap extends Component {
     } 
     
     return (
-      <Map google={this.props.google}
+      <Map 
+      google={this.props.google}
           style={{width: '100%', height: '400px', position: 'relative'}}
           className={'map'}
           zoom={14}
@@ -94,8 +99,9 @@ class PinMap extends Component {
           onDragend={this.onMapMoved} >
 
           {
-            this.state.pins && this.state.pins.map((pin) => {
+            this.state.pins && this.state.pins.map((pin, index) => {
               return (<Marker
+              key={index}
               onClick={this.onMarkerClick}
               title={pin.title}
               descriptions={pin.descriptions}
@@ -136,6 +142,7 @@ class PinMap extends Component {
     )
   }
 }
+
 
 export default GoogleApiWrapper({
   apiKey: "AIzaSyAMKm8sG8J_fYSLGf3oxUNfNLNM2SvRr2c"
