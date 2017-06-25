@@ -23,7 +23,6 @@ class Home extends Component {
         <Navbar />
         <div className="header-title">
         </div>
-        {console.log(this.state.pins)}
         <div><PinMap pins={this.state.pins && this.state.pins}/></div>
         <div className="wrapper-pin-card">
           <div className="scroll is-half is-offset-one-quarter"></div>
@@ -31,7 +30,7 @@ class Home extends Component {
           <div className="columns is-multiline pin-card">
             {
               this.state.pins && Object.keys(this.state.pins).map((key, index) => {
-                return (<PinCard key={`PinCard-${key}`}  id={key} {...this.state.pins[key]}/>)
+                return (<PinCard key={`PinCard-${key}`}  pinId={key} {...this.state.pins[key]}/>)
               })
             }
           </div>
