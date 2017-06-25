@@ -330,7 +330,11 @@ class New extends Component {
               containerStyle={{}}
               centerAroundCurrentLocation={true}
               onClick={this.onMapClicked}
-              onDragend={this.onMapMoved} />
+              onDragend={this.onMapMoved} >
+
+              <Marker
+                  position={{lat: this.state.lat, lng: this.state.long}} />
+          </Map>
           </div>
         </div>
         <center>
