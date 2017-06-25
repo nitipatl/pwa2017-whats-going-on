@@ -86,7 +86,6 @@ class PinMap extends Component {
               imageGame={this.state.pins[key].imageGame}
               id={this.state.pins[key].id}
               name={this.state.pins[key].name}
-              createAt={this.state.pins[key].createAt}
               position={{lat: this.state.pins[key].cood_y, lng: this.state.pins[key].cood_x}} />)
             })
           }
@@ -98,11 +97,10 @@ class PinMap extends Component {
             <div>
               <ul>
                 <li className="line-heigh-info-window">
-                  <div className="inline info-img"><img className="image is-96x96" src={this.state.selectedPlace.imageGame}/></div> 
+                  <div className="inline info-img"><img className="image is-64x64" src={this.state.selectedPlace.imageGame}/></div> 
                   <div className="inline info-title margin-top-10">
                     <div className="title is-5">{this.state.selectedPlace.title}</div>
                     <div className="subtitle is-6">create by: {this.state.selectedPlace.name}</div>
-                    <div><i className="fa fa-clock-o middle"></i>{this.state.selectedPlace.createAt}</div>
                   </div>
                 </li>
                 <li>
