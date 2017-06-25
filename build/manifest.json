@@ -1,6 +1,9 @@
 {
-  "short_name": "BoardGame meeting",
-  "name": "BoardGame meeting",
+  "short_name": "ME TOO!",
+  "name": "ME TOO!",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
+  "description": "BoardGame meeting app.",
   "icons": [
     {
       "src": "icon/icon-48x48.png",
