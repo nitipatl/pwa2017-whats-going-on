@@ -12,6 +12,7 @@ const PinCard = (props) => {
     members,
     userId
   } = props
+  
   return (
     <div className="column is-one-quarter">
       <Link to={`/events/${id}`}>
