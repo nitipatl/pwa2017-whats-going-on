@@ -1,0 +1,26 @@
+{
+  "short_name": "ME TOO!",
+  "name": "ME TOO!",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
+  "description": "BoardGame meeting app.",
+  "icons": [
+    {
+      "src": "icon/icon-48x48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "icon/icon-96x96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "icon/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone"
+}
