@@ -6,13 +6,16 @@ class New extends Component {
   constructor(props) {
     super(props);
 
-    // var config = {
-    //   apiKey: "<API_KEY>",
-    //   authDomain: "<PROJECT_ID>.firebaseapp.com",
-    //   databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
-    //   storageBucket: "<BUCKET>.appspot.com",
-    // };
-    // firebase.initializeApp(config);
+    var config = {
+      apiKey: "AIzaSyAMKm8sG8J_fYSLGf3oxUNfNLNM2SvRr2c",
+      authDomain: "pwa2017-whats-going-on.firebaseapp.com",
+      databaseURL: "https://pwa2017-whats-going-on.firebaseio.com",
+      projectId: "pwa2017-whats-going-on",
+      storageBucket: "pwa2017-whats-going-on.appspot.com",
+      messagingSenderId: "1042397826782"
+    };
+    firebase.initializeApp(config);
+
     this.state = {
       title: '',
       member: '',
@@ -60,7 +63,37 @@ class New extends Component {
 
   onClickSubmit = () => {
     console.log('submit');
+    console.log(this.state);
+    const database = firebase.database();
+    database.ref('/Pin').push({
+      id: 0,
+      title: 'หาคนรู้ใจมาเล่นเกม Uno spin',
+      descriptions: 'มาเล่นเกมกันบ้านเรามีเกมเล่นเยอะเลย มีของกินอร่อย ๆ เพียบ แอร์พร้อม wi-fi ฟรี',
+      cood_x: 100.4660867,
+      cood_y: 13.7138229,
+      categories: ['co-op', 'board', 'Adventure', 'party'],
+      createAt: '25/06/2560 17:54:23',
+      createBy: 'top.collection.it@gmail.com',
+      imageGame: 'https://i.ytimg.com/vi/ckUQse-kWv4/maxresdefault.jpg',
+      members: [{name: 'Khing', token: 'cxasdadsadsdad', image: 'http://static.goal.com/4323400/4323432_news.jpg'}],
+      name: 'TOPz',
+      numberOfUsers: 6,
+    })
   }
+//   Pin {
+// id: 1,
+// title: "หาคนรู้ใจมาเล่นเกม",
+// descriptions: "มาเล่นเกมกันบ้านเรามีเกมเล่นเยอะเลย มีของกินอร่อย ๆ เพียบ แอร์พร้อม wi-fi ฟรี",
+// members: 6,
+// cood_x: 100.4660867 ,
+// cood_y: 13.7138229 ,
+// categories : ["co-op", "board", "Adventure","party"],
+// createAt: "02-07-60",
+// numberUsers: 5,
+// members: 2,
+// name : Topz
+// imageGame : ""
+// }
 
   render() {
     return (
