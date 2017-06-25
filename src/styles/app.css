@@ -90,3 +90,24 @@
 .width-100 {
   width: 100%;
 }
+
+.login-block {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.new-event {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 100px;
+  height: 100px;
+  background: #fff;
+  border-radius: 50px;
+  box-shadow: 2px 2px 20px rgba(100,100,100,0.4);
+}
+
+.f-100 {
+  margin-top: 80px;
+  font-size: 50px !important;
+}

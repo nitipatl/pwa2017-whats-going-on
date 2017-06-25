@@ -89,12 +89,12 @@ class PinMap extends Component {
           {
             this.state.pins && Object.keys(this.state.pins).map((key, index) => {
                return (<Marker
-                  key={index}
+                  key={key}
                   onClick={this.onMarkerClick}
                   title={this.state.pins[key].title}
                   descriptions={this.state.pins[key].descriptions}
                   imageGame={this.state.pins[key].imageGame}
-                  id={this.state.pins[key].id}
+                  key_id={key}
                   name={this.state.pins[key].name}
                   position={{lat: this.state.pins[key].cood_y, lng: this.state.pins[key].cood_x}} />
                 )
