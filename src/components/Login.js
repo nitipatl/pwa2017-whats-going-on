@@ -35,7 +35,7 @@ class Login extends Component {
             <div className="container is-center">
               <div className="wrapper">
                 <FacebookLogin
-                  appId="1846600289000828"
+                  appId="737673286402767"
                   autoLoad={false}
                   fields="name,email,picture"
                   icon="fa-facebook"
