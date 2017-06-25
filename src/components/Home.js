@@ -39,9 +39,12 @@ class Home extends Component {
     return (
       <div>
         <Navbar />
+        <div className="header-title">
+        </div>
         <div><PinMap></PinMap></div>
         <div className="wrapper-pin-card">
           <div className="scroll is-half is-offset-one-quarter"></div>
+          <h1 className="subtitle is-4 text-center"><p>meet new friend around </p><p>and let's them play</p></h1>
           {/*<div className="columns is-multiline pin-card">
             {
               this.state.pins.map((pin, index) => <PinCard key={`PinCard-${index}`} {...pin} id={index} />)
