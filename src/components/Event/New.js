@@ -321,7 +321,7 @@ class New extends Component {
             </div>
           </div>
 
-          <label className="label" style={{marginBottom: 20,}}>Pick up location</label>
+          <label className="label" style={{marginBottom: 20,}}>LOCATION</label>
           <div className="columns" style={{height: 400, marginBottom: 20,}}>
             <Map google={this.props.google}
               style={{width: '100%', height: '400px', position: 'relative'}}
