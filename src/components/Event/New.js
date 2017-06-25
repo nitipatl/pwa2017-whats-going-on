@@ -25,6 +25,16 @@ class New extends Component {
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
     }
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          this.setState({ 
+            lat: position.coords.latitude,
+            long: position.coords.longitude,
+          })
+        })
+    } else {
+        alert("Geolocation is not supported by this browser.")
+    }
 
     this.state = {
       title: '',
@@ -170,6 +180,7 @@ class New extends Component {
   errorClass(error) {
     return(error.length === 0 ? '' : 'is-danger');
   }
+
 
   render() {
     return (
