@@ -34,7 +34,7 @@ class PinMap extends Component {
       this.setState({ 
           pins: [{
             id: 0,
-            title: 'หาคนรู้ใจมาเล่นเกม Uno spin',
+            title: 'ccหาคนรู้ใจมาเล่นเกม Uno spin',
             descriptions: 'มาเล่นเกมกันบ้านเรามีเกมเล่นเยอะเลย มีของกินอร่อย ๆ เพียบ แอร์พร้อม wi-fi ฟรี',
             cood_x: 100.4660867,
             cood_y: 13.7138229,
@@ -82,8 +82,6 @@ class PinMap extends Component {
     if (!this.props.loaded) {
       return <div>Loading...</div>
     } 
-
-    console.log(this.state.pins)
     
     return (
       <Map google={this.props.google}

@@ -45,11 +45,14 @@ class Home extends Component {
         <div className="wrapper-pin-card">
           <div className="scroll is-half is-offset-one-quarter"></div>
           <h1 className="subtitle is-4 text-center"><p>meet new friend around </p><p>and let's them play</p></h1>
-          {/*<div className="columns is-multiline pin-card">
+          <div className="columns is-multiline pin-card">
             {
-              this.state.pins.map((pin, index) => <PinCard key={`PinCard-${index}`} {...pin} id={index} />)
+              Object.keys(this.state.pins).map((key, index) => {
+                console.log(this.state.pins[key]);
+                <PinCard key={`PinCard-${key}`} {...this.state.pins[key]} id={key} />
+              })
             }
-          </div>*/}
+          </div>
         </div>
       </div>
     )
