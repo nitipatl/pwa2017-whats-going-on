@@ -42,7 +42,7 @@
     color: #fff;
     text-align: center;
     bottom: 30px;
-    position: absolute;
+    position: relative;
     animation: hover;
     animation-duration: 1s;
     animation-iteration-count: infinite;
@@ -51,6 +51,8 @@
     background: #00d1b2;
     border-radius: 80px;
     z-index: 99999;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .info-title {
