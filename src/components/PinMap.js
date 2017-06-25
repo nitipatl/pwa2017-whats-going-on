@@ -32,7 +32,6 @@ class PinMap extends Component {
 
   componentDidMount = () => {
     this._fetchData()
-    console.log(this.props.pins);
   }
   
   onMapMoved = (props, map) => {

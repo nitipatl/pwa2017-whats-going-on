@@ -14,7 +14,7 @@ class Login extends Component {
     }
   }
   responseFacebook = (response) => {
-    console.log(response)
+    
     const auth = {
       userID: response.userID,
       name: response.name,
