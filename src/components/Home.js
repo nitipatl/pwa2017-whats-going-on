@@ -23,15 +23,15 @@ class Home extends Component {
         <Navbar />
         <div className="header-title">
         </div>
-        <div><PinMap pins={this.state.pins}/></div>
+        {console.log(this.state.pins)}
+        <div><PinMap pins={this.state.pins && this.state.pins}/></div>
         <div className="wrapper-pin-card">
           <div className="scroll is-half is-offset-one-quarter"></div>
           <h1 className="subtitle is-4 text-center"><p>meet new friend around </p><p>and let's them play</p></h1>
           <div className="columns is-multiline pin-card">
             {
-              Object.keys(this.state.pins).map((key, index) => {
-                /*console.log(this.state.pins[key]);*/
-                <PinCard key={`PinCard-${key}`} {...this.state.pins[key]} id={key} />
+              this.state.pins && Object.keys(this.state.pins).map((key, index) => {
+                return (<PinCard key={`PinCard-${key}`}  id={key} {...this.state.pins[key]}/>)
               })
             }
           </div>
