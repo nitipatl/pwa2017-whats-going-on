@@ -3,19 +3,19 @@ import { Link } from 'react-router-dom'
 
 const PinCard = (props) => {
   const {
-    id,
+    pinId,
     name,
     imageGame,
     title,
     createAt,
-    numberUsers,
+    numberOfUsers,
     members,
     userId
   } = props
-  
+  console.log(props)
   return (
     <div className="column is-one-quarter">
-      <Link to={`/events/${id}`}>
+      <Link to={`/events/${pinId}`}>
         <div className="card">
           <div className="card-image">
             <figure className="image is-3by2">
@@ -35,7 +35,7 @@ const PinCard = (props) => {
               </div>
             </div>
             <div className="content">
-              <div><i className="fa fa-users middle"></i>{members.length}/{numberUsers} คน</div>
+              <div><i className="fa fa-users middle"></i>{members.length}/{numberOfUsers} คน</div>
               <div><i className="fa fa-clock-o middle"></i>{createAt}</div>
             </div>
           </div>
