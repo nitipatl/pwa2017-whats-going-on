@@ -18,13 +18,20 @@ class PinMap extends Component {
   } 
 
   _fetchData = () => {
-    axios.get('https://pwa2017-whats-going-on.firebaseio.com/Pin.json')
-      .then((response) => {
-        this.setState({ 
-          pins: response.data
-        })
-        console.log(this.state.pins);
-        this.setState({ 
+    // axios.get('https://pwa2017-whats-going-on.firebaseio.com/Pin.json')
+    //   .then((response) => {
+    //     this.setState({ 
+    //       pins: response.data
+    //     })
+    //     console.log(this.state.pins);
+        
+
+
+    //   })
+    //   .catch((error) => {
+    //     console.log(error)
+    //   })
+      this.setState({ 
           pins: [{
             id: 0,
             title: 'หาคนรู้ใจมาเล่นเกม Uno spin',
@@ -40,12 +47,6 @@ class PinMap extends Component {
             numberOfUsers: 6,
           }]
         })
-
-
-      })
-      .catch((error) => {
-        console.log(error)
-      })
   }
 
   componentDidMount = () => {
@@ -116,7 +117,7 @@ class PinMap extends Component {
               <ul>
                 <li className="line-heigh-info-window">
                   <div className="inline info-img"><img className="image is-96x96" src={this.state.selectedPlace.imageGame}/></div> 
-                  <div className="inline">
+                  <div className="inline info-title margin-top-10">
                     <div className="title is-5">{this.state.selectedPlace.title}</div>
                     <div className="subtitle is-6">create by: {this.state.selectedPlace.name}</div>
                     <div><i className="fa fa-clock-o middle"></i>{this.state.selectedPlace.createAt}</div>
