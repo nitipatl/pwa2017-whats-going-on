@@ -23,7 +23,7 @@ class Home extends Component {
         <Navbar />
         <div className="header-title">
         </div>
-        <div><PinMap pins={this.state.pins && this.state.pins}/></div>
+        <div><PinMap/></div>
         <div className="wrapper-pin-card">
           <div className="scroll is-half is-offset-one-quarter"></div>
           <h1 className="subtitle is-4 text-center upper"><p>meet new friend around </p><p>and let's them play</p></h1>

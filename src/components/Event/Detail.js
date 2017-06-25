@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Navbar from '../Common/Navbar'
 import JoinButton from './Join'
+import PinMap from '../PinMap.js'
 
 class Detail extends Component { 
   constructor(props) {
@@ -35,36 +36,38 @@ class Detail extends Component {
     return (
       <div>
         <Navbar />
+        <img src={ this.state.data.imageGame } />
         <article className="media">
-          <figure className="media-left">
-            <p className="image is-96x96">
-              <img src={ this.state.data.imageGame } />
-            </p>
-          </figure>
           <div className="media-content">
-            <div className="content">
-              <p>
-                <strong>{ this.state.data.name }</strong> <small>{ this.state.data.createAt }</small>
-                <br />
-                <h3>{ this.state.data.title }</h3>
+            <div className="content content-detail">
+                <h1 className="title">{ this.state.data.title }</h1>
+                <p>
+                    <a>
+                      <span className="icon is-small"><i className="fa fa-tags"></i></span>
+                    </a>
+                    { this.state.data.categories && this.state.data.categories.join(' ') }
+                    &nbsp;&nbsp;
+                </p>
+                <p>
+                    <a>
+                      <span className="icon is-small"><i className="fa fa-users"></i> </span>
+                    </a>
+                    &nbsp; { this.state.data.members.length } / { this.state.data.numberOfUsers }
+                    &nbsp;&nbsp;                  
+                  </p>
+                <p>
                 { this.state.data.descriptions }
-              </p>
+                </p>
+                <p>
+                  <div className="subtitle is-6">{ this.state.data.name } <small>{ this.state.data.createAt }</small></div>
+                </p>
+                
+                <p className="margin-top-10">
+                    <JoinButton detailReload={this._fetchData.bind(this)} id={ this.props.match.params.id } />
+                </p>
             </div>
-            <nav className="level is-mobile">
-              <div className="level-left">
-                <a className="level-item">
-                  <span className="icon is-small"><i className="fa fa-tags"></i></span>
-                </a>
-                { this.state.data.categories && this.state.data.categories.join(' ') }
-                &nbsp;&nbsp;
-                <a className="level-item">
-                  <span className="icon is-small"><i className="fa fa-users"></i></span>
-                </a>
-                &nbsp; { this.state.data.members.length } / { this.state.data.numberOfUsers }
-                &nbsp;&nbsp;
-                <JoinButton detailReload={this._fetchData.bind(this)} id={ this.props.match.params.id } />
-              </div>
-            </nav>
+            <div><PinMap pinid={this.props.match.params.id}/></div>
+            
           </div>
         </article>
       </div>

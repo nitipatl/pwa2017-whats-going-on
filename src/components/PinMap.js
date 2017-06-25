@@ -14,14 +14,25 @@ class PinMap extends Component {
       activeMarker: {},
       selectedPlace: {},
       pins: [],
+      isSinglePin: false,
     }
   }
   
   _fetchData = () => {
-    axios.get('https://pwa2017-whats-going-on.firebaseio.com/Pin.json')
+    this.isSinglePin = this.props.pinid!=undefined
+    let pinId = this.isSinglePin ? "/" + this.props.pinid : "" ;
+    let getPinUrl = 'https://pwa2017-whats-going-on.firebaseio.com/Pin' + pinId + '.json';
+  
+    let pinContent= {pinId: {}};
+    axios.get(getPinUrl)
       .then((response) => {
+        if(this.isSinglePin){
+          pinContent.pinId = response.data
+        } else {
+          pinContent = response.data;
+        }
         this.setState({ 
-          pins: response.data
+          pins: pinContent
         })
 
       })
@@ -78,14 +89,15 @@ class PinMap extends Component {
           {
             this.state.pins && Object.keys(this.state.pins).map((key, index) => {
                return (<Marker
-              key={index}
-              onClick={this.onMarkerClick}
-              title={this.state.pins[key].title}
-              descriptions={this.state.pins[key].descriptions}
-              imageGame={this.state.pins[key].imageGame}
-              id={this.state.pins[key].id}
-              name={this.state.pins[key].name}
-              position={{lat: this.state.pins[key].cood_y, lng: this.state.pins[key].cood_x}} />)
+                  key={index}
+                  onClick={this.onMarkerClick}
+                  title={this.state.pins[key].title}
+                  descriptions={this.state.pins[key].descriptions}
+                  imageGame={this.state.pins[key].imageGame}
+                  id={this.state.pins[key].id}
+                  name={this.state.pins[key].name}
+                  position={{lat: this.state.pins[key].cood_y, lng: this.state.pins[key].cood_x}} />
+                )
             })
           }
           
