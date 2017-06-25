@@ -26,20 +26,20 @@ class New extends Component {
 
     this.state = {
       title: '',
-      member: '',
       game: '',
       numberOfMember: '',
       description: '',
       auth: {},
       data: [],
       selectGameKey: '',
+      formErrors: {title: '', numberOfMember: '', game: ''},
+      titleValidate: false,
+      numberOfMemberValidate: false,
+      gameValidate: false,
+      formValid: false
     }
 
-    this.onTitleChange = this.onTitleChange.bind(this);
-    this.onHandleSelectedMemberChange = this.onHandleSelectedMemberChange.bind(this);
-    this.onHandleSelectedGameChange = this.onHandleSelectedGameChange.bind(this);
-    this.onHandleNumberOfMemberChange = this.onHandleNumberOfMemberChange.bind(this);
-    this.onHandleDescriptionChange = this.onHandleDescriptionChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -64,41 +64,55 @@ class New extends Component {
       })
   }
 
-  onTitleChange(event) {
+  handleChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
     this.setState({
-      title: event.target.value,
-    })
+      [name]: value
+    }, () => { this.validateField(name, value) });
   }
 
-  onHandleSelectedMemberChange(event) {
+  validateField(fieldName, value) {
+    console.log(`validateField ${fieldName} :: ${value} `)
+    let fieldValidationErrors = this.state.formErrors;
+    let titleValidate = this.state.titleValidate;
+    let numberOfMemberValidate = this.state.numberOfMemberValidate;
+    let gameValidate = this.state.gameValidate;
+
+    switch(fieldName) {
+      case 'title':
+        titleValidate = value !== ''
+        fieldValidationErrors.title = titleValidate ? '' : ' is empty';
+        break;
+      case 'numberOfMember':
+        numberOfMemberValidate = value !== ''
+        fieldValidationErrors.numberOfMember = numberOfMemberValidate ? '' : ' is empty';
+        break
+      case 'game':
+        console.log('game ', value);
+        gameValidate = value !== ''
+        fieldValidationErrors.game = gameValidate ? '' : 'please select';
+        break
+      default:
+        break;
+    }
     this.setState({
-      member: event.target.value,
-    })
+      formErrors: fieldValidationErrors,
+      titleValidate,
+      numberOfMemberValidate,
+      gameValidate,
+    }, this.validateForm);
   }
 
-  onHandleSelectedGameChange(event) {
+  validateForm() {
     this.setState({
-      game: event.target.value,
-      selectGameKey: event.target.key,
-    })
-  }
-
-  onHandleNumberOfMemberChange(event) {
-    this.setState({
-      numberOfMember: event.target.value,
-    })
-  }
-
-  onHandleDescriptionChange(event) {
-    this.setState({
-      description: event.target.value,
-    })
+      formValid: this.state.titleValidate &&
+      this.state.numberOfMemberValidate &&
+      this.state.gameValidate
+    }, () => console.log(this.state.numberOfMemberValidate));
   }
 
   onClickSubmit = () => {
-    console.log('submit');
-    console.log(this.state);
-    console.log(this.state.auth);
     const database = firebase.database();
     const gameObject = this.state.data.find(item => item.name === this.state.game);
     const objectToSave = {
@@ -114,7 +128,7 @@ class New extends Component {
       name: this.state.auth.name,
       numberOfUsers: this.state.numberOfMember,
     }
-    // database.ref('/Pin').push(objectToSave);
+    database.ref('/Pin').push(objectToSave);
   }
   
   renderListGame = () => (
@@ -125,6 +139,10 @@ class New extends Component {
     })
   );
 
+  errorClass(error) {
+    return(error.length === 0 ? '' : 'is-danger');
+  }
+
   render() {
     return (
       <div class="content">
@@ -133,14 +151,18 @@ class New extends Component {
           <div className="columns">
             <div className="column is-three-quarters">
               <div className="field">
-                <label className="label">Title</label>
+                <label className="label">
+                  <span style={{color: '#ff0000'}}>*</span> Title
+                </label>
                 <p className="control">
                   <input
-                    className="input"
+                    required
+                    className={`input ${this.errorClass(this.state.formErrors.title)}`}
                     type="text"
                     placeholder="Title"
                     value={this.state.title}
-                    onChange={this.onTitleChange} 
+                    name="title"
+                    onChange={this.handleChange} 
                   />
                 </p>
               </div>
@@ -150,56 +172,38 @@ class New extends Component {
           <div className="columns field is-horizonta">
             <div className="column is-one-quarters">
               <div className="field">
-                <label className="label">Members</label>
+                <label className="label">
+                  <span style={{color: '#ff0000'}}>*</span> Number Of Member
+                </label>
                 <p className="control">
-                  <span className="select">
-                    <select
-                      onChange={this.onHandleSelectedMemberChange}
-                      value={this.state.member}
-                    >
-                      <option value="0">0</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
-                    </select>
-                  </span>
+                  <input
+                    required
+                    className={`input ${this.errorClass(this.state.formErrors.numberOfMember)}`}
+                    type="text"
+                    placeholder="Number Of Member"
+                    value={this.state.numberOfMember}
+                    name="numberOfMember"
+                    onChange={this.handleChange} 
+                  />
                 </p>
               </div>
             </div>
             <div className="column is-one-quarters">
               <div className="field">
-                <label className="label">Game</label>
+                <label className="label">
+                  <span style={{color: '#ff0000'}}>*</span> Game
+                </label>
                 <p className="control">
-                  <span className="select">
-                    <select 
-                      onChange={this.onHandleSelectedGameChange}
+                  <span className={`select ${this.errorClass(this.state.formErrors.game)}`}>
+                    <select
+                      name="game"
+                      onChange={this.handleChange}
                       value={this.state.game}
                     >
-                      <option value="none">none</option>
+                      <option value="">none</option>
                       {this.renderListGame()}
                     </select>
                   </span>
-                </p>
-              </div>
-            </div>
-            <div className="column is-one-quarters">
-              <div className="field">
-                <label className="label">Number Of Member</label>
-                <p className="control">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Text input"
-                    onChange={this.onHandleNumberOfMemberChange}
-                    value={this.state.numberOfMember}
-                  />
                 </p>
               </div>
             </div>
@@ -213,7 +217,8 @@ class New extends Component {
                   <textarea
                     className="textarea"
                     placeholder="Textarea"
-                    onChange={this.onHandleDescriptionChange}
+                    name="description"
+                    onChange={this.handleChange}
                     value={this.state.description}
                   >
                   </textarea>
@@ -221,18 +226,20 @@ class New extends Component {
               </div>
             </div>
           </div>
-          
-          <a className="button is-primary" onClick={this.onClickSubmit}>Save</a>
+
+          <label className="label" style={{marginBottom: 20,}}>Pick up location</label>
+          <div className="columns" style={{height: 400, marginBottom: 20,}}>
+            <Map google={this.props.google}
+              style={{width: '100%', height: '400px', position: 'relative'}}
+              className={'map'}
+              zoom={14}
+              containerStyle={{}}
+              centerAroundCurrentLocation={true}
+              onClick={this.onMapClicked}
+              onDragend={this.onMapMoved} />
+          </div>
         </div>
-        
-      {/*<Map google={this.props.google}
-          style={{width: '100%', height: '400px', position: 'relative'}}
-          className={'map'}
-          zoom={14}
-          containerStyle={{}}
-          centerAroundCurrentLocation={true}
-          onClick={this.onMapClicked}
-          onDragend={this.onMapMoved} />*/}
+        <button className="button is-primary" onClick={this.onClickSubmit} disabled={!this.state.formValid}>Save</button>
       </div>
     );
   };
