@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
-import { camelize } from './lib/String'
-import {makeCancelable} from './lib/cancelablePromise'
+import { camelize } from '../lib/String'
+import {makeCancelable} from '../lib/cancelablePromise'
 import invariant from 'invariant'
 
 const mapStyles = {
@@ -43,10 +43,10 @@ const evtNames = [
   'zoom_changed'
 ];
 
-export {wrapper as GoogleApiWrapper} from './GoogleApiComponent'
-export {Marker} from './components/Marker'
-export {InfoWindow} from './components/InfoWindow'
-export {HeatMap} from './components/HeatMap'
+export {wrapper as GoogleApiWrapper} from '../GoogleApiComponent'
+export {Marker} from '../components/Marker'
+export {InfoWindow} from '../components/InfoWindow'
+export {HeatMap} from '../components/HeatMap'
 
 export class Map extends React.Component {
     constructor(props) {
@@ -281,8 +281,8 @@ evtNames.forEach(e => Map.propTypes[camelize(e)] = PropTypes.func)
 Map.defaultProps = {
   zoom: 14,
   initialCenter: {
-    lat: 37.774929,
-    lng: -122.419416
+    lat: 13.715086099999999,
+    lng: 100.46713179999999
   },
   center: {},
   centerAroundCurrentLocation: false,

@@ -41,7 +41,7 @@ class Navbar extends Component {
       <nav className="nav">
         <div className="nav-left">
           <Link to="/" className="nav-item">
-            <img src={Logo} alt="Logo" />
+            <img src={Logo} alt="Logo" className="margin-right-10" /> MEE TOO
           </Link>
         </div>
         {
