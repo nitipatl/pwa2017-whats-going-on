@@ -18,39 +18,16 @@ class PinMap extends Component {
   }
   
   _fetchData = () => {
-    // axios.get('https://pwa2017-whats-going-on.firebaseio.com/Pin.json')
-    //   .then((response) => {
-    //     this.setState({ 
-    //       pins: response.data
-    //     })
-    //     console.log(this.state.pins);
-        
-
-
-    //   })
-    //   .catch((error) => {
-    //     console.log(error)
-    //   })
-    Object.keys(this.props.pins).map((key, index) => {
-      console.log("pins " + this.props.pins[key]);
-    });
-      
-      this.setState({ 
-          pins: [{
-            id: 0,
-            title: 'ccหาคนรู้ใจมาเล่นเกม Uno spin',
-            descriptions: 'มาเล่นเกมกันบ้านเรามีเกมเล่นเยอะเลย มีของกินอร่อย ๆ เพียบ แอร์พร้อม wi-fi ฟรี',
-            cood_x: 100.4660867,
-            cood_y: 13.7138229,
-            categories: ['co-op', 'board', 'Adventure', 'party'],
-            createAt: '25/06/2560 17:54:23',
-            createBy: 'top.collection.it@gmail.com',
-            imageGame: 'https://i.ytimg.com/vi/ckUQse-kWv4/maxresdefault.jpg',
-            members: [{name: 'Khing', token: 'cxasdadsadsdad', image: 'http://static.goal.com/4323400/4323432_news.jpg'}],
-            name: 'TOPz',
-            numberOfUsers: 6,
-          }]
+    axios.get('https://pwa2017-whats-going-on.firebaseio.com/Pin.json')
+      .then((response) => {
+        this.setState({ 
+          pins: response.data
         })
+
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   componentDidMount = () => {
@@ -99,17 +76,17 @@ class PinMap extends Component {
           onDragend={this.onMapMoved} >
 
           {
-            this.state.pins && this.state.pins.map((pin, index) => {
-              return (<Marker
+            this.state.pins && Object.keys(this.state.pins).map((key, index) => {
+               return (<Marker
               key={index}
               onClick={this.onMarkerClick}
-              title={pin.title}
-              descriptions={pin.descriptions}
-              imageGame={pin.imageGame}
-              id={pin.id}
-              name={pin.name}
-              createAt={pin.createAt}
-              position={{lat: pin.cood_y, lng: pin.cood_x}} />)
+              title={this.state.pins[key].title}
+              descriptions={this.state.pins[key].descriptions}
+              imageGame={this.state.pins[key].imageGame}
+              id={this.state.pins[key].id}
+              name={this.state.pins[key].name}
+              createAt={this.state.pins[key].createAt}
+              position={{lat: this.state.pins[key].cood_y, lng: this.state.pins[key].cood_x}} />)
             })
           }
           
