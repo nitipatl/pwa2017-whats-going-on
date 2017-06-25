@@ -90,3 +90,8 @@
 .width-100 {
   width: 100%;
 }
+
+.login-block {
+  margin-top: 10px;
+  margin-right: 10px;
+}
