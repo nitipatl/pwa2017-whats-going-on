@@ -56,11 +56,18 @@ class Navbar extends Component {
             </div>
           </div>
         }
-        <span className="nav-toggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </span>
+        <div className="new-event">
+        <Link to="/events-new" >
+          <span className="icon">
+            <i className="fa fa-plus f-100"></i>
+          </span>
+        </Link>
+        </div>
+         <Link to="/login">
+          <div className="login-block">Login</div>
+        </Link>
+       
+        
         <div className="nav-right nav-menu">
           <div className="nav-item">
             <div className="field is-grouped">
