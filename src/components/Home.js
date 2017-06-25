@@ -22,11 +22,13 @@ class Home extends Component {
       <div>
         <Navbar />
         <div><PinMap></PinMap></div>
-        {/*<div className="columns is-multiline pin-card">
+        <div className="wrapper-pin-card">
+        <div className="columns is-multiline pin-card">
           {
             this.state.pins.map((pin, index) => <PinCard key={`PinCard-${index}`} {...pin} id={index} />)
           }
-        </div>*/}
+        </div>
+        </div>
       </div>
     )
   }

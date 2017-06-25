@@ -27,11 +27,17 @@ class PinMap extends Component {
         this.setState({ 
           pins: [{
             id: 0,
-            title: "หาคนรู้ใจมาเล่นเกม",
-            descriptions: "มาเล่นเกมกันบ้านเรามีเกมเล่นเยอะเลย มีของกินอร่อย ๆ เพียบ แอร์พร้อม wi-fi ฟรี",
-            cood_y: 13.7138229,
+            title: 'หาคนรู้ใจมาเล่นเกม Uno spin',
+            descriptions: 'มาเล่นเกมกันบ้านเรามีเกมเล่นเยอะเลย มีของกินอร่อย ๆ เพียบ แอร์พร้อม wi-fi ฟรี',
             cood_x: 100.4660867,
-            name: "TOPz"
+            cood_y: 13.7138229,
+            categories: ['co-op', 'board', 'Adventure', 'party'],
+            createAt: '25/06/2560 17:54:23',
+            createBy: 'top.collection.it@gmail.com',
+            imageGame: 'https://i.ytimg.com/vi/ckUQse-kWv4/maxresdefault.jpg',
+            members: [{name: 'Khing', token: 'cxasdadsadsdad', image: 'http://static.goal.com/4323400/4323432_news.jpg'}],
+            name: 'TOPz',
+            numberOfUsers: 6,
           }]
         })
 
@@ -80,7 +86,7 @@ class PinMap extends Component {
     
     return (
       <Map google={this.props.google}
-          style={{width: '100%', height: '100%', position: 'relative'}}
+          style={{width: '100%', height: '400px', position: 'relative'}}
           className={'map'}
           zoom={14}
           containerStyle={{}}
@@ -97,6 +103,7 @@ class PinMap extends Component {
               imageGame={pin.imageGame}
               id={pin.id}
               name={pin.name}
+              createAt={pin.createAt}
               position={{lat: pin.cood_y, lng: pin.cood_x}} />)
             })
           }
@@ -107,11 +114,12 @@ class PinMap extends Component {
           onClose={this.onInfoWindowClose}>
             <div>
               <ul>
-                <li className="title is-5 line-heigh-info-window">
+                <li className="line-heigh-info-window">
                   <div className="inline info-img"><img className="image is-96x96" src={this.state.selectedPlace.imageGame}/></div> 
                   <div className="inline">
-                    <div>{this.state.selectedPlace.title}</div>
+                    <div className="title is-5">{this.state.selectedPlace.title}</div>
                     <div className="subtitle is-6">create by: {this.state.selectedPlace.name}</div>
+                    <div><i className="fa fa-clock-o middle"></i>{this.state.selectedPlace.createAt}</div>
                   </div>
                 </li>
                 <li>
