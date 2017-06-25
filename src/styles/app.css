@@ -16,3 +16,11 @@
 .line-heigh-info-window {
   line-height: 1.4 !important;
 }
+
+.inline {
+  display: inline-block;
+}
+
+.info-img {
+  margin-right: 20px;
+}

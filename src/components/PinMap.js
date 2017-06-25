@@ -23,6 +23,19 @@ class PinMap extends Component {
         this.setState({ 
           pins: response.data
         })
+        console.log(this.state.pins);
+        this.setState({ 
+          pins: [{
+            id: 0,
+            title: "หาคนรู้ใจมาเล่นเกม",
+            descriptions: "มาเล่นเกมกันบ้านเรามีเกมเล่นเยอะเลย มีของกินอร่อย ๆ เพียบ แอร์พร้อม wi-fi ฟรี",
+            cood_y: 13.7138229,
+            cood_x: 100.4660867,
+            name: "TOPz"
+          }]
+        })
+
+
       })
       .catch((error) => {
         console.log(error)
@@ -83,6 +96,7 @@ class PinMap extends Component {
               descriptions={pin.descriptions}
               imageGame={pin.imageGame}
               id={pin.id}
+              name={pin.name}
               position={{lat: pin.cood_y, lng: pin.cood_x}} />)
             })
           }
@@ -94,7 +108,11 @@ class PinMap extends Component {
             <div>
               <ul>
                 <li className="title is-5 line-heigh-info-window">
-                  <img className="image is-96x96" src={this.state.selectedPlace.imageGame}/> {this.state.selectedPlace.title}
+                  <div className="inline info-img"><img className="image is-96x96" src={this.state.selectedPlace.imageGame}/></div> 
+                  <div className="inline">
+                    <div>{this.state.selectedPlace.title}</div>
+                    <div className="subtitle is-6">create by: {this.state.selectedPlace.name}</div>
+                  </div>
                 </li>
                 <li>
                   {this.state.selectedPlace.descriptions}
