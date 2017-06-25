@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
+import moment from 'moment';
+import axios from 'axios';
+
 import Navbar from '../Common/Navbar';
+import Map,{GoogleApiWrapper} from '../Map';
+import Marker from '../Marker';
+import { loadState, deleteState } from '../../lib/localStorage';
 
 class New extends Component {
   constructor(props) {
@@ -14,7 +20,9 @@ class New extends Component {
       storageBucket: "pwa2017-whats-going-on.appspot.com",
       messagingSenderId: "1042397826782"
     };
-    firebase.initializeApp(config);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
 
     this.state = {
       title: '',
@@ -22,6 +30,9 @@ class New extends Component {
       game: '',
       numberOfMember: '',
       description: '',
+      auth: {},
+      data: [],
+      selectGameKey: '',
     }
 
     this.onTitleChange = this.onTitleChange.bind(this);
@@ -29,6 +40,28 @@ class New extends Component {
     this.onHandleSelectedGameChange = this.onHandleSelectedGameChange.bind(this);
     this.onHandleNumberOfMemberChange = this.onHandleNumberOfMemberChange.bind(this);
     this.onHandleDescriptionChange = this.onHandleDescriptionChange.bind(this);
+  }
+
+  componentDidMount() {
+    this._fetchData()
+    const auth = loadState('auth')
+    if(auth !== undefined) {
+      this.setState({
+        auth
+      })
+    }
+  }
+
+  _fetchData() {
+    axios.get('https://pwa2017-whats-going-on.firebaseio.com/ListGame.json')
+      .then((response) => {
+        this.setState({ 
+          data: response.data,
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   onTitleChange(event) {
@@ -46,6 +79,7 @@ class New extends Component {
   onHandleSelectedGameChange(event) {
     this.setState({
       game: event.target.value,
+      selectGameKey: event.target.key,
     })
   }
 
@@ -64,40 +98,36 @@ class New extends Component {
   onClickSubmit = () => {
     console.log('submit');
     console.log(this.state);
+    console.log(this.state.auth);
     const database = firebase.database();
-    database.ref('/Pin').push({
-      id: 0,
-      title: 'หาคนรู้ใจมาเล่นเกม Uno spin',
-      descriptions: 'มาเล่นเกมกันบ้านเรามีเกมเล่นเยอะเลย มีของกินอร่อย ๆ เพียบ แอร์พร้อม wi-fi ฟรี',
+    const gameObject = this.state.data.find(item => item.name === this.state.game);
+    const objectToSave = {
+      title: this.state.title,
+      descriptions: this.state.description,
       cood_x: 100.4660867,
       cood_y: 13.7138229,
       categories: ['co-op', 'board', 'Adventure', 'party'],
-      createAt: '25/06/2560 17:54:23',
-      createBy: 'top.collection.it@gmail.com',
-      imageGame: 'https://i.ytimg.com/vi/ckUQse-kWv4/maxresdefault.jpg',
+      createAt: moment().format('DD/MM/YYYY, h:mm:ss a'),
+      createBy: this.state.auth.email,
+      game: gameObject || {},
       members: [{name: 'Khing', token: 'cxasdadsadsdad', image: 'http://static.goal.com/4323400/4323432_news.jpg'}],
-      name: 'TOPz',
-      numberOfUsers: 6,
-    })
+      name: this.state.auth.name,
+      numberOfUsers: this.state.numberOfMember,
+    }
+    // database.ref('/Pin').push(objectToSave);
   }
-//   Pin {
-// id: 1,
-// title: "หาคนรู้ใจมาเล่นเกม",
-// descriptions: "มาเล่นเกมกันบ้านเรามีเกมเล่นเยอะเลย มีของกินอร่อย ๆ เพียบ แอร์พร้อม wi-fi ฟรี",
-// members: 6,
-// cood_x: 100.4660867 ,
-// cood_y: 13.7138229 ,
-// categories : ["co-op", "board", "Adventure","party"],
-// createAt: "02-07-60",
-// numberUsers: 5,
-// members: 2,
-// name : Topz
-// imageGame : ""
-// }
+  
+  renderListGame = () => (
+    this.state.data.map((item, index) => {
+       return (
+        <option value={item.name} key={index}>{item.name}</option>
+       )
+    })
+  );
 
   render() {
     return (
-      <div>
+      <div class="content">
         <Navbar />
         <div className="containers">
           <div className="columns">
@@ -152,11 +182,8 @@ class New extends Component {
                       onChange={this.onHandleSelectedGameChange}
                       value={this.state.game}
                     >
-                      <option value="WARCAFT">WARCAFT</option>
-                      <option value="DOTA2">DOTA2</option>
-                      <option value="KAKERLAKEN POKER">KAKERLAKEN POKER</option>
-                      <option value="catan">catan</option>
-                      <option value="uno spin">uno spin</option>
+                      <option value="none">none</option>
+                      {this.renderListGame()}
                     </select>
                   </span>
                 </p>
@@ -197,9 +224,21 @@ class New extends Component {
           
           <a className="button is-primary" onClick={this.onClickSubmit}>Save</a>
         </div>
+        
+      {/*<Map google={this.props.google}
+          style={{width: '100%', height: '400px', position: 'relative'}}
+          className={'map'}
+          zoom={14}
+          containerStyle={{}}
+          centerAroundCurrentLocation={true}
+          onClick={this.onMapClicked}
+          onDragend={this.onMapMoved} />*/}
       </div>
     );
   };
 }
 
-export default New;
+export default GoogleApiWrapper({
+  apiKey: "AIzaSyAMKm8sG8J_fYSLGf3oxUNfNLNM2SvRr2c"
+})(New);
+
